@@ -20,6 +20,11 @@ async function getPlanets(apiURL) {
         url = json.next;
         planets = planets.concat(json.results);
     }
+    planets.sort((a,b) => {
+        const aDate = new Date(a.created);
+        const bDate = new Date(b.created);
+        return aDate.getTime() >= bDate.getTime()? 1 : -1;
+    });
     return planets;
 
 }
