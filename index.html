@@ -3,11 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> TEST </title>
+        <title> Timeline WIP </title>
+        <script src=".\script.js"></script>
+        <link rel="stylesheet" href=".\style.css" />
     </head>
     <body>
-        <h3> TEST </h3>
-        <p id='listapianeti'></p>
-        <script src=".\script.js"></script>
-    </body>
+        <h3>Timeline Pianeti</h3>
+        <div id="controls">
+            <input type="date" id="start" name="end" min="1900-01-01" max="2099-12-31">
+            <input type="date" id="end" name="end" min="1900-01-01" max="2099-12-31">
+            <button onclick="searchPlanets()">
+                Search
+            </button>
+            <button onclick="invertPlanets()">
+                Change Order
+            </button>
+        </div>
+        <div class="timeline" id="timeline"></div>
+    <body>
 </html>
