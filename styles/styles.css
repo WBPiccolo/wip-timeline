@@ -4,7 +4,7 @@
 
 /* Set a background color */
 body {
-  background-color: #9099be;
+  background-color: #242e57;
   font-family: Helvetica, sans-serif;
 }
 
@@ -136,18 +136,16 @@ body {
 .pageTitle {
   text-align: center;
   font-size: 500%;
-  font-family: "Urbanist", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 div.controls {
   text-align: center;
   margin-bottom: 10px;
 }
-div.controls input {
+div.controls input, div.controls button {
   font-size: 25px;
-}
-div.controls button {
-  font-size: 25px;
+  height: 5rem;
 }
 
 .noPlanetsFound {
@@ -169,8 +167,19 @@ div.controls button {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  flex-direction: row;
 }
 
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 940px) {
+  .box {
+    flex-direction: column;
+  }
+
+  div.controls input, div.controls button {
+    width: 20rem;
+  }
+}
 .box-content {
   padding: 20px;
   margin: 10px;

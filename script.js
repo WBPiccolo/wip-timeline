@@ -1,9 +1,8 @@
-//import {PlanetElement} from './planetElement.js'
+const plantesURL = 'https://swapi.dev/api/planets';
 let planets = [];
 init();
 
 async function init() {
-    const plantesURL = 'https://swapi.dev/api/planets';
     getPlanets(plantesURL).then((resPlanets) => {
         planets = resPlanets;
         popolaTimeline(resPlanets)
@@ -42,9 +41,11 @@ function popolaTimeline(planets) {
             const planetContent = document.createElement('div');
             planetContent.classList.add('content');
             const planetLine = document.createElement('h2');
+            planetLine.classList.add('planetTitle');
             planetLine.innerText = pianeta.name;
             const planetDate = document.createElement('p');
-            planetDate.innerText = pianeta.created;
+            planetDate.classList.add('planetText');
+            planetDate.innerText = formatDate(pianeta.created);
 
             planetContent.appendChild(planetLine);
             planetContent.appendChild(planetDate);
@@ -69,24 +70,30 @@ function searchPlanets() {
     
     if (isNaN(startDate.getTime())) {
         startDate = new Date();
-        //document.getElementById('startDateError').innerHTML = 'La data non è valorizzata correttamente';
-        //return;
     }
 
     if (isNaN(endDate.getTime())) {
         endDate = new Date();
-        //document.getElementById('endDateError').innerHTML = 'La data non è valorizzata correttamente';
-        //return;
     }
 
     startDate.setHours(23, 59, 59, 999);
     endDate.setHours(23, 59, 59, 999);
 
-    const filteredPlanets = planets.filter((planet) => {
-        const creationDate = new Date(planet.created);
-        return(creationDate.getTime() >= startDate.getTime()) && (creationDate.getTime() <= endDate.getTime());
+    getPlanets(plantesURL).then((resPlanets) => {
+        planets = resPlanets;
+        const filteredPlanets = planets.filter((planet) => {
+            const creationDate = new Date(planet.created);
+            return(creationDate.getTime() >= startDate.getTime()) && (creationDate.getTime() <= endDate.getTime());
+        });
+        popolaTimeline(filteredPlanets)
     });
 
-    popolaTimeline(filteredPlanets);
+}
 
+function formatDate(dateString){
+    const formattedDate = new Date(dateString);
+    if(isNaN(formattedDate.getTime())){
+        return '';
+    }
+    return formattedDate.toLocaleString();
 }

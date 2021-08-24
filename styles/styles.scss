@@ -3,17 +3,16 @@
 .pageTitle {
     text-align: center;
     font-size: 500%;
-    font-family: 'Urbanist', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 div.controls{
     text-align: center;
     margin-bottom: 10px;
-    input{
+
+    input, button{
         font-size: 25px;
-    }
-    button{
-        font-size: 25px;
+        height: 5rem;
     }
 }
 
@@ -36,6 +35,20 @@ div.controls{
     -webkit-box-pack: center;
        -ms-flex-pack: center;
      justify-content: center;
+     flex-direction: row;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 940px) {
+  .box {
+    flex-direction: column;
+  }
+
+  div.controls{
+    input, button{
+      width: 20rem;
+    }
+  } 
 }
 
 .box-content {
