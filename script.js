@@ -36,19 +36,55 @@ function popolaTimeline(planets) {
     if (planets.length > 0) {
         planets.forEach((pianeta, index) => {
             const direction = index % 2 ? 'right' : 'left';
+
             const planetContainer = document.createElement('div');
             planetContainer.classList.add('container', direction);
+
             const planetContent = document.createElement('div');
             planetContent.classList.add('content');
+
             const planetLine = document.createElement('h2');
             planetLine.classList.add('planetTitle');
             planetLine.innerText = pianeta.name;
+
             const planetDate = document.createElement('p');
             planetDate.classList.add('planetText');
             planetDate.innerText = formatDate(pianeta.created);
 
+            const planetBottomText = document.createElement('div');
+            planetBottomText.classList.add('planetBottomText');
+
+            const planetPopulation = document.createElement('i');
+            planetPopulation.classList.add('far', 'fa-user', 'planetInfo');
+            planetPopulation.innerHTML = ` ${formatPopulation(pianeta.population)}`;
+            planetBottomText.appendChild(planetPopulation);
+
+            const planetRotationPeriod = document.createElement('i');
+            planetRotationPeriod.classList.add('far', 'fa-clock', 'planetInfo');
+            planetRotationPeriod.innerHTML = ` ${
+                pianeta.rotation_period
+            } h `
+            planetBottomText.appendChild(planetRotationPeriod);
+
+            const planetOrbitalPeriod = document.createElement('i');
+
+            planetOrbitalPeriod.classList.add('far', 'fa-circle', 'planetInfo');
+            planetOrbitalPeriod.innerHTML = ` ${
+                pianeta.orbital_period
+            } days `
+            planetBottomText.appendChild(planetOrbitalPeriod);
+
+            const planetDiameter = document.createElement('i');
+            planetDiameter.classList.add('far', 'fa-map', 'planetInfo');
+            planetDiameter.innerHTML = ` ${
+                pianeta.diameter
+            } km`
+            planetBottomText.appendChild(planetDiameter);
+
             planetContent.appendChild(planetLine);
             planetContent.appendChild(planetDate);
+            planetContent.appendChild(planetBottomText);
+
             planetContainer.appendChild(planetContent);
             timeline.appendChild(planetContainer);
 
@@ -67,7 +103,7 @@ function searchPlanets() {
     const endValue = document.getElementById('end').value;
     let startDate = new Date(startValue);
     let endDate = new Date(endValue);
-    
+
     if (isNaN(startDate.getTime())) {
         startDate = new Date();
     }
@@ -90,10 +126,45 @@ function searchPlanets() {
 
 }
 
-function formatDate(dateString){
+function formatDate(dateString) {
     const formattedDate = new Date(dateString);
-    if(isNaN(formattedDate.getTime())){
+    if (isNaN(formattedDate.getTime())) {
         return '';
     }
     return formattedDate.toLocaleString();
+}
+
+function formatPopulation(x) {
+    if (isNaN(x)) {
+        return x + '';
+    }
+
+    if (x < 9999) {
+        return x;
+    }
+
+    if (x < 1000000) {
+        return Math.round(x / 1000) + "K";
+    }
+    if (x < 10000000) {
+        return(x / 1000000).toFixed(2) + "M";
+    }
+
+    if (x < 1000000000) {
+        return Math.round((x / 1000000)) + "M";
+    }
+
+    if (x < 1000000000000) {
+        return Math.round((x / 1000000000)) + "B";
+    }
+
+    if (x < 1000000000000000000) {
+        return Math.round((x / 1000000000000)) + "T";
+    }
+
+    if (x < 1000000000000000000000000) {
+        return Math.round((x / 1000000000000000000)) + "Q";
+    }
+
+    return '>10^24'
 }

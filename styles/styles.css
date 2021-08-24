@@ -148,6 +148,10 @@ div.controls input, div.controls button {
   height: 5rem;
 }
 
+.planetInfo {
+  padding: 3px;
+}
+
 .noPlanetsFound {
   text-align: center;
   font-size: 200%;
