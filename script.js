@@ -36,58 +36,22 @@ function popolaTimeline(planets) {
     if (planets.length > 0) {
         planets.forEach((pianeta, index) => {
             const direction = index % 2 ? 'right' : 'left';
-
-            const planetContainer = document.createElement('div');
-            planetContainer.classList.add('container', direction);
-
-            const planetContent = document.createElement('div');
-            planetContent.classList.add('content');
-
-            const planetLine = document.createElement('h2');
-            planetLine.classList.add('planetTitle');
-            planetLine.innerText = pianeta.name;
-
-            const planetDate = document.createElement('p');
-            planetDate.classList.add('planetText');
-            planetDate.innerText = formatDate(pianeta.created);
-
-            const planetBottomText = document.createElement('div');
-            planetBottomText.classList.add('planetBottomText');
-
-            const planetPopulation = document.createElement('i');
-            planetPopulation.classList.add('far', 'fa-user', 'planetInfo');
-            planetPopulation.innerHTML = ` ${formatPopulation(pianeta.population)}`;
-            planetBottomText.appendChild(planetPopulation);
-
-            const planetRotationPeriod = document.createElement('i');
-            planetRotationPeriod.classList.add('far', 'fa-clock', 'planetInfo');
-            planetRotationPeriod.innerHTML = ` ${
-                pianeta.rotation_period
-            } h `
-            planetBottomText.appendChild(planetRotationPeriod);
-
-            const planetOrbitalPeriod = document.createElement('i');
-
-            planetOrbitalPeriod.classList.add('far', 'fa-circle', 'planetInfo');
-            planetOrbitalPeriod.innerHTML = ` ${
-                pianeta.orbital_period
-            } days `
-            planetBottomText.appendChild(planetOrbitalPeriod);
-
-            const planetDiameter = document.createElement('i');
-            planetDiameter.classList.add('far', 'fa-map', 'planetInfo');
-            planetDiameter.innerHTML = ` ${
-                pianeta.diameter
-            } km`
-            planetBottomText.appendChild(planetDiameter);
-
-            planetContent.appendChild(planetLine);
-            planetContent.appendChild(planetDate);
-            planetContent.appendChild(planetBottomText);
-
-            planetContainer.appendChild(planetContent);
-            timeline.appendChild(planetContainer);
-
+            const timelineElement = document.createElement('div')
+            timelineElement.classList.add('container', direction);
+            const elementTemplate = `
+                <div class="content">
+                    <h2 class="planetTitle">${pianeta.name}</h2>
+                    <p class="planetText">${formatDate(pianeta.created)}</p>
+                    <div class="planetBottomText">
+                        <i class="far fa-user planetInfo"> ${formatPopulation(pianeta.population)} </i>
+                        <i class="far fa-clock planetInfo">${pianeta.rotation_period} h </i>
+                        <i class="far fa-circle planetInfo">${pianeta.orbital_period} days </i>
+                        <i class="far fa-map planetInfo">${pianeta.diameter} km</i>
+                    </div>
+                </div>
+            `;
+            timelineElement.innerHTML = elementTemplate;
+            timeline.appendChild(timelineElement);
         });
     } else {
         noPlanetsFound.style.display = 'block';
