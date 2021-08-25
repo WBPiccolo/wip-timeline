@@ -36,17 +36,18 @@ function popolaTimeline(planets) {
     if (planets.length > 0) {
         planets.forEach((pianeta, index) => {
             const direction = index % 2 ? 'right' : 'left';
+            const planetColor = getColorByClimate(pianeta.climate)
             const timelineElement = document.createElement('div')
             timelineElement.classList.add('container', direction);
             const elementTemplate = `
                 <div class="content">
-                    <h2 class="planetTitle">${pianeta.name}</h2>
+                    <span class="planetTitle"><i class="fas fa-globe planetIcon" style="color: ${planetColor}"></i> ${pianeta.name}</span>
                     <p class="planetText">${formatDate(pianeta.created)}</p>
                     <div class="planetBottomText">
-                        <i class="far fa-user planetInfo"> ${formatPopulation(pianeta.population)} </i>
-                        <i class="far fa-clock planetInfo">${pianeta.rotation_period} h </i>
-                        <i class="far fa-circle planetInfo">${pianeta.orbital_period} days </i>
-                        <i class="far fa-map planetInfo">${pianeta.diameter} km</i>
+                        <i class="far fa-user planetInfo"></i> ${formatPopulation(pianeta.population)} 
+                        <i class="far fa-clock planetInfo"></i> ${pianeta.rotation_period} h 
+                        <i class="far fa-circle planetInfo"></i> ${pianeta.orbital_period} days 
+                        <i class="far fa-map planetInfo"></i> ${pianeta.diameter} km
                     </div>
                 </div>
             `;
@@ -131,4 +132,25 @@ function formatPopulation(x) {
     }
 
     return '>10^24'
+}
+
+
+function getColorByClimate(climate){
+    const climatesMap = {
+        arid: 'BlanchedAlmond', 
+        temperate: 'DarkGreen', 
+        frozen: 'CadetBlue',
+        murky: 'Cornsilk', 
+        hot: 'Coral', 
+        tropical: 'MediumAquaMarine', 
+        artificial: 'AliceBlue', 
+        frigid: 'CornflowerBlue', 
+        polluted: 'DarkSlateBlue', 
+        unknown: 'Black', 
+        superheated: 'Tomato'
+    };
+    if(climatesMap[climate]){
+        return climatesMap[climate];
+    }
+    return '';
 }

@@ -18,8 +18,13 @@ div.controls{
 
 .planetInfo{
   padding: 3px;
+  font-family: 'Roboto', sans-serif;
 }
 
+.planetTitle{
+  font-size: 1.5em;
+  font-weight: bolder
+}
 .noPlanetsFound{
     text-align: center;
     font-size: 200%;
