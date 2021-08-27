@@ -1,0 +1,15 @@
+<div class="pageTitle">Timeline Pianeti</div>
+<div class="controls box" id="controls">
+    <input class="box-content" type="date" id="start" name="end" min="1900-01-01" max="2099-12-31">
+    <input class="box-content" type="date" id="end" name="end" min="1900-01-01" max="2099-12-31">
+    <button class="box-content" onclick="searchPlanets()">
+        Search
+    </button>
+    <button class="box-content" onclick="invertPlanets()">
+        Change Order
+    </button>
+</div>
+<div class ="noPlanetsFound fade-in" style="display: none;" id ="noPlanetsFound">
+    Non è stato trovato alcun pianeta corrispondente ai criteri di ricerca.
+</div>
+<div class="timeline fade-in" id="timeline"></div>

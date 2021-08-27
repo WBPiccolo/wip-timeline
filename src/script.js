@@ -1,8 +1,9 @@
+import 'regenerator-runtime/runtime';
+
 const plantesURL = 'https://swapi.dev/api/planets';
 let planets = [];
-init();
 
-async function init() {
+export default async function init() {
     getPlanets(plantesURL).then((resPlanets) => {
         planets = resPlanets;
         popolaTimeline(resPlanets)
@@ -153,4 +154,9 @@ function getColorByClimate(climate){
         return climatesMap[climate];
     }
     return '';
+}
+
+module.exports = {
+    init: init,
+    searchPlanets: searchPlanets,
 }
